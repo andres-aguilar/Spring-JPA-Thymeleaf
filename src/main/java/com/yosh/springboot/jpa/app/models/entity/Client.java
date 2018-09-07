@@ -10,6 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.PrePersist;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -23,11 +28,18 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private String name, email;
+	@NotEmpty
+	private String name;
 	
+	@NotEmpty
+	@Email	
+	private String email;
+	
+	@NotEmpty
 	@Column(name="last_name")
 	private String lastName;
 	
+	@NotNull
 	@Column(name="created_at")  // Remonbra el campo en la tabla de la BD
 	@Temporal(TemporalType.DATE)  // Asignar atomaticamente fecha
 	private Date createdAt;

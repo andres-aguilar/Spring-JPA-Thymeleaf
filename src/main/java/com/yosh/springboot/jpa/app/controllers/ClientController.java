@@ -1,10 +1,14 @@
 package com.yosh.springboot.jpa.app.controllers;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yosh.springboot.jpa.app.models.dao.IClientDao;
@@ -33,7 +37,13 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String saveClient(Client client) {
+	public String saveClient(@Valid Client client, BindingResult result, Model model) {
+		
+		if (result.hasErrors()) {
+			model.addAttribute("title", "Registro de nuevo cliente");
+			return "createClient"; 
+		} 
+		
 		this.client.save(client);
 		return "redirect:list";
 	}

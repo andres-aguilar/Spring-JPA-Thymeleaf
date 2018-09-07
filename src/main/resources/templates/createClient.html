@@ -53,14 +53,17 @@
 				<tr>
 					<td> Nombre </td>
 					<td> <input class="form-control" type="text" th:field="*{name}" /> </td>
+					<td> <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p> </td>
 				</tr>
 				<tr>
 					<td> Apellido </td>
 					<td> <input class="form-control" type="text" th:field="*{lastName}" /> </td>
+					<td> <p class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p> </td>
 				</tr>
 				<tr>
 					<td> Email </td>
 					<td> <input class="form-control" type="email" th:field="*{email}" /> </td>
+					<td> <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p> </td>
 				</tr>
 				<tr>
 					<td> <button class="btn" type="submit">Registrar</button> </td>
