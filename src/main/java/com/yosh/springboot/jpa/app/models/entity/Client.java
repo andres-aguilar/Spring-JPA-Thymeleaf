@@ -28,20 +28,19 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
+	@NotEmpty  // Valida que el campo no esté vacío
 	private String name;
 	
 	@NotEmpty
-	@Email	
+	@Email	 // Valida el formato del email
 	private String email;
 	
 	@NotEmpty
-	@Column(name="last_name")
+	@Column(name="last_name") // Renombra el campo en la tabla de la BD
 	private String lastName;
 	
-	@NotNull
-	@Column(name="created_at")  // Remonbra el campo en la tabla de la BD
-	@Temporal(TemporalType.DATE)  // Asignar atomaticamente fecha
+	@Column(name="created_at")  // Renombra el campo en la tabla de la BD
+	@Temporal(TemporalType.DATE)  // Asigna automaticamente fecha
 	private Date createdAt;
 	
 	@PrePersist
@@ -79,6 +78,5 @@ public class Client implements Serializable {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	
-	
+		
 }
