@@ -12,7 +12,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#" th:text="${title}">Navbar</a>
+		<a class="navbar-brand" href="#">SpringBoot</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -66,10 +66,9 @@
 					<td> <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p> </td>
 				</tr>
 				<tr>
-					<td> <button class="btn" type="submit">Registrar</button> </td>
+					<td> <button class="btn" type="submit">Guardar</button> </td>
 				</tr>
 			</table>
-			<input type="hidden" th:field="*{id}" />
 		</form>
 		
 	</div>

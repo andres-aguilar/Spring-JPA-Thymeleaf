@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.PrePersist;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
