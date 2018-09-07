@@ -3,14 +3,15 @@ package com.yosh.springboot.jpa.app.models.entity;
 import java.util.Date;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Temporal;
+import javax.persistence.PrePersist;
 import javax.persistence.TemporalType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="Clients")
@@ -30,6 +31,11 @@ public class Client implements Serializable {
 	@Column(name="created_at")  // Remonbra el campo en la tabla de la BD
 	@Temporal(TemporalType.DATE)  // Asignar atomaticamente fecha
 	private Date createdAt;
+	
+	@PrePersist
+	public void prePersist() {
+		this.createdAt = new Date();
+	}
 	
 	public Long getId() {
 		return id;
