@@ -68,6 +68,14 @@ public class ClientController {
 		
 		return "createClient";
 	}
-	
+
+	@RequestMapping(value="/delete/{id}")
+	public String deleteClient(@PathVariable(value="id") Long id) {
+		if (id > 0) {
+			client.delete(id);
+		}
+		
+		return "redirect:/list";
+	}
 }
 

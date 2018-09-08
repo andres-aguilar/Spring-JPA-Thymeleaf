@@ -33,7 +33,15 @@ public class ClientDAO implements IClientDao {
 	}
 
 	@Override
+	@Transactional
 	public Client findOne(Long id) {
 		return em.find(Client.class, id);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		Client client = findOne(id);
+		em.remove(client);
 	}
 }
