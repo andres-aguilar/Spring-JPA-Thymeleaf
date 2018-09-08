@@ -16,7 +16,7 @@ public class ClientDAO implements IClientDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	@Transactional()
+	
 	@Override
 	public List<Client> findAll() {
 		return em.createQuery("FROM Client").getResultList();

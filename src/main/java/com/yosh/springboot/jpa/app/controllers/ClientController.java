@@ -15,14 +15,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yosh.springboot.jpa.app.models.entity.Client;
-import com.yosh.springboot.jpa.app.models.dao.IClientDao;
+import com.yosh.springboot.jpa.app.models.service.ClientService;
 
 @Controller
 @SessionAttributes("client")  // Guarda el cliente en session y lo pasa entre las vistas (Muy util para editar registros)
 public class ClientController {
 	
 	@Autowired
-	private IClientDao client;
+	private ClientService client;
 	
 	@GetMapping("/list")
 	public String listClients(Model model) {
