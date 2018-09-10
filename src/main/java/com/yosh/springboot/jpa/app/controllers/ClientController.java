@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -41,7 +42,7 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String saveClient(@Valid Client client, BindingResult result, Model model, SessionStatus status) {
+	public String saveClient(@Valid Client client, BindingResult result, Model model, SessionStatus status, RedirectAttributes flash) {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Registro de nuevo cliente");
@@ -50,19 +51,27 @@ public class ClientController {
 		
 		this.client.save(client);
 		status.setComplete();
+		flash.addFlashAttribute("success", "Cliente agregado con éxito!");
 		return "redirect:list";
 	}
 	
 	@RequestMapping(value="/edit/{id}")
-	public String editClient(@PathVariable(value="id") Long id, Model model) {
+	public String editClient(@PathVariable(value="id") Long id, Model model, RedirectAttributes flash) {
 		model.addAttribute("title", "Editar cliente");
 		
 		Client currentClient = null;
 		
 		if (id > 0) {
 			currentClient = client.findOne(id);
+			
+			if (currentClient == null) {
+				flash.addFlashAttribute("error", "El cliente no existe!");
+				return "redirect:list";
+			}
+			
 			model.addAttribute("client", currentClient);
 		} else {
+			flash.addFlashAttribute("error", "El cliente no existe!");
 			return "redirect:list";
 		}
 		
@@ -70,11 +79,12 @@ public class ClientController {
 	}
 
 	@RequestMapping(value="/delete/{id}")
-	public String deleteClient(@PathVariable(value="id") Long id) {
+	public String deleteClient(@PathVariable(value="id") Long id, RedirectAttributes flash) {
 		if (id > 0) {
 			client.delete(id);
 		}
 		
+		flash.addFlashAttribute("success", "Cliente eliminado con éxito!");
 		return "redirect:/list";
 	}
 }
