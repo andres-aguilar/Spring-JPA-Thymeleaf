@@ -1,2 +1,15 @@
-INSERT INTO Clients (id, name, last_name, email, created_at) VALUES (1, 'Andres', 'Aguilar', 'andresyoshimar@gmail.com', '2018-09-07');
-INSERT INTO Clients (id, name, last_name, email, created_at) VALUES (2, 'Yoshimar', 'Aguilar', 'nano_yosh13@hotmail.com', '2017-09-07');
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Andres", "Aguilar", "andresyoshimar@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Yoshimar", "Aguilar", "nano_yosh13@hotmail.com", "2017-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Mario", "Aguilar", "mario@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Lucia", "Montalvo", "lucy@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Alejandra", "Aguilar", "aleaguilar@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Pepe", "Aguilar", "pepe@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Jose", "Salgado", "andresyoshimar@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Ana", "perez", "aperez@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Juan", "Lopez", "jlopez@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Diego", "Armenta", "armentadiego@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Carlos", "Diaz", "carlosd@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Oscar", "Martinez", "andresyoshimar@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Pablo", "Pedro", "andresyoshimar@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Rafael", "Juarez", "andresyoshimar@gmail.com", "2018-09-07");
+INSERT INTO clients (name, last_name, email, created_at) VALUES ("Itzamar", "Aguilar", "itza@gmail.com", "2018-09-07");
