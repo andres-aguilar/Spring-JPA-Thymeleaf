@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -14,9 +15,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.yosh.springboot.jpa.app.models.entity.Client;
 import com.yosh.springboot.jpa.app.models.service.ClientService;
+import com.yosh.springboot.jpa.app.util.paginator.PageRender;
 
 @Controller
 @SessionAttributes("client")  // Guarda el cliente en session y lo pasa entre las vistas (Muy util para editar registros)
@@ -26,9 +31,14 @@ public class ClientController {
 	private ClientService client;
 	
 	@GetMapping("/list")
-	public String listClients(Model model) {
+	public String listClients(@RequestParam(name="page", defaultValue="0") int page, Model model) {
+		Pageable pageRequest = new PageRequest(page, 5);
+		Page<Client> clients = client.findAll(pageRequest);
+		PageRender<Client> pageRender = new PageRender<Client>("/list", clients);
+		
 		model.addAttribute("title", "Listado de clientes");
-		model.addAttribute("clients", client.findAll());
+		model.addAttribute("clients", clients);
+		model.addAttribute("page", pageRender);
 		return "listClients";
 	}
 	
