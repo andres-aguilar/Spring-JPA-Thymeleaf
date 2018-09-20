@@ -7,7 +7,7 @@
 	<div class="container mt-5">
 		<h2 th:text="${title}"></h2>
 		
-		<form th:action="@{/create}" th:object="${client}" method="post" >
+		<form th:action="@{/create}" th:object="${client}" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td> Nombre </td>
@@ -23,6 +23,11 @@
 					<td> Email </td>
 					<td> <input class="form-control" type="email" th:field="*{email}" /> </td>
 					<td> <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p> </td>
+				</tr>
+				<tr>
+					<td> Foto </td>
+					<td> <input class="file-input" type="file" name="file"/> </td>
+					<td> <p class="text-danger" th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></p> </td>
 				</tr>
 				<tr>
 					<td> <button class="btn" type="submit">Guardar</button> </td>

@@ -10,7 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -29,6 +36,22 @@ public class ClientController {
 	
 	@Autowired
 	private ClientService client;
+	
+	@GetMapping("/view/{id}")
+	public String view(@PathVariable(value="id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+		
+		Client currentClient = client.findOne(id);
+		
+		if(currentClient == null) {
+			flash.addAttribute("error", "Cliente no encontrado!");
+			return "redirect:/list";
+		}
+		
+		model.put("client", currentClient);
+		model.put("title", currentClient.getName());
+		
+		return "view";
+	}
 	
 	@GetMapping("/list")
 	public String listClients(@RequestParam(name="page", defaultValue="0") int page, Model model) {
@@ -52,12 +75,27 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String saveClient(@Valid Client client, BindingResult result, Model model, SessionStatus status, RedirectAttributes flash) {
+	public String saveClient(@Valid Client client, BindingResult result, Model model, @RequestParam("file") MultipartFile photo, SessionStatus status, RedirectAttributes flash) {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Registro de nuevo cliente");
 			return "createClient"; 
 		} 
+		
+		if(!photo.isEmpty()) {
+			Path path = Paths.get("src//main//resources//static//uploads");
+			String rootPath = path.toFile().getAbsolutePath();
+			
+			try {
+				byte[] photoBytes = photo.getBytes();
+				Path fullPath = Paths.get(rootPath + "//" + photo.getOriginalFilename());
+				Files.write(fullPath, photoBytes);
+				client.setPhoto(photo.getOriginalFilename());
+				flash.addFlashAttribute("info", "Imagen guardada con éxito!");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		this.client.save(client);
 		status.setComplete();

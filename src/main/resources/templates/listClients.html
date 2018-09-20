@@ -21,13 +21,13 @@
 			</thead>
 			<tbody>
 				<tr th:each="client: ${clients}">
-					<td th:text="${client.id}"></td>
+					<td> <a th:href="@{/view/}+${client.id}" th:text="${client.id}"></a> </td>
 					<td th:text="${client.name}"></td>
 					<td th:text="${client.lastName}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createdAt}"></td>
 					<td> 
-						<a class="btn btn-xs" th:href="@{/edit/}+${client.id}">Edit</a>
+						<a class="btn btn-primary btn-xs" th:href="@{/edit/}+${client.id}">Edit</a>
 						<a class="btn btn-danger btn-xs" th:href="@{/delete/}+${client.id}">Delete</a> 
 					</td>
 				</tr>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<div class="container mt-5">
+
+		<div class="card bg-light">
+			<div class="card-header"><h2 th:text="${title}"></h2></div>
+			<div class="card-body">
+				<img th:if="${#strings.length(client.photo) > 0}" class="img-thumbnail rounded float-left" style="width: 25%" th:src="@{'/uploads/' + ${client.photo}}" />
+				
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${client.name}"></li>
+					<li class="list-group-item" th:text="${client.lastName}"></li>
+					<li class="list-group-item" th:text="${client.email}"></li>
+					<li class="list-group-item" th:text="${client.createdAt}"></li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
